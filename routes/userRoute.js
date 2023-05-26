@@ -321,7 +321,7 @@ router.post("/email", authMiddleware, async (req, res) => {
         const userId = req.body.userId;
         const user = await User.findById(userId);
         const mailOptions = {
-            to: ["tiwariketan11@gmail.com"], // user.email
+            to: [user.email], // user.email
             subject: "Appointmet Confirmation Mail",
             html: `<h1>Hi ${user.name}</h1>,
             <p>Your appointment has been confirmed with ${req.body.doctorName} on ${req.body.date} at ${req.body.time}</p>`
@@ -373,7 +373,7 @@ router.post("/send-forgot-password-email", async (req, res) => {
         console.log(auth);
         let link = `${process.env.BASE_URL}/reset-password/${auth.token}`;
         const mailOptions = {
-            to: 'tiwariketan11@gmail.com',  //user.email
+            to: user.email,  //user.email
             subject: 'Password Reset for Doctor Appointment System...',
             html: `
                 <!doctype html>
