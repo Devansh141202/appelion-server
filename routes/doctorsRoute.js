@@ -7,6 +7,9 @@ const User = require("../models/userModel");
 
 router.post("/get-doctor-info-by-user-id", authMiddleware, async (req, res) => {
     try {
+        if(req.body.userId1){
+            req.body.userId = req.body.userId1;
+        }
         const doctor = await Doctor.findOne({ userId: req.body.userId });
         return res.status(200).send({
             success: true,
