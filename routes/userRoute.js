@@ -218,7 +218,7 @@ router.post("/delete-all-notifications", authMiddleware, async (req, res) => {
 
 router.get("/get-all-approved-doctors", authMiddleware, async (req, res) => {
     try {
-        const doctors = await Doctor.find({ status: "approved" });
+        const doctors = await Doctor.find({ status: "approved", userId: { $ne: req.body.userId } });
         return res.status(200).send({
             message: "Doctors fetched successfully",
             success: true,
